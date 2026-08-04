@@ -39,9 +39,7 @@
   "url": "https://thecortexa.com/",
   "description": "Cortexa is a film production studio crafting original short films, AI-powered films, and web series across drama, thriller, sci-fi, and comedy.",
   "sameAs": [
-    "https://www.instagram.com/thecortexa",
-    "https://www.youtube.com/@yvrCortexa",
-    "https://www.facebook.com/profile.php?id=61592660908822"
+    "https://www.instagram.com/yvrcortexa"
   ]
 }
 </script>
@@ -217,8 +215,8 @@
   }
   .video-frame{
     position:relative;
-    width:min(280px, 74vw);
-    aspect-ratio:9/16;
+    width:min(400px, 92vw);
+    aspect-ratio:4/7;
     border-radius:26px;
     overflow:hidden;
     background:#000;
@@ -251,20 +249,6 @@
     background:rgba(255,255,255,0.25);
     z-index:4;
   }
-  .sound-toggle{
-    position:absolute;
-    bottom:14px;right:14px;
-    z-index:4;
-    width:36px;height:36px;
-    border-radius:50%;
-    background:rgba(5,5,6,0.65);
-    backdrop-filter:blur(6px);
-    border:1px solid rgba(255,255,255,0.18);
-    display:flex;align-items:center;justify-content:center;
-    cursor:pointer;
-    font-size:15px;
-  }
-
   @keyframes fadeUp{
     from{opacity:0;transform:translateY(18px);}
     to{opacity:1;transform:translateY(0);}
@@ -300,7 +284,7 @@
 <header id="siteHeader">
   <div class="wrap">
     <nav style="justify-content:flex-end;">
-      <a href="https://www.instagram.com/thecortexa" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">📸</a>
+      <a href="https://www.instagram.com/yvrcortexa" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">📸</a>
     </nav>
   </div>
 </header>
@@ -316,20 +300,19 @@
       <div class="video-notch"></div>
       <iframe
         id="heroVideo"
-        data-video-id="Y2NiEedO76Q"
+        src="https://www.instagram.com/reel/DbUJl_NvWZL/embed/"
         title="Cortexa short film"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        referrerpolicy="strict-origin-when-cross-origin"
+        frameborder="0"
+        scrolling="no"
         allowfullscreen
         loading="lazy">
       </iframe>
-      <button class="sound-toggle" id="soundToggle" aria-label="Toggle sound">🔇</button>
     </div>
   </div>
 
   <p class="hero-desc">Original stories crafted with imagination, innovation, and cinematic excellence.</p>
   <div class="hero-actions">
-    <a href="https://www.instagram.com/thecortexa" target="_blank" rel="noopener" class="btn btn-primary">Explore Our Films</a>
+    <a href="https://www.instagram.com/yvrcortexa" target="_blank" rel="noopener" class="btn btn-primary">Explore Our Films</a>
   </div>
 </section>
 
@@ -337,9 +320,7 @@
   <div class="wrap">
     <a href="#top" class="logo display chrome-text" style="font-size:22px;">CORTEXA</a>
     <div class="social-icons">
-      <a href="https://www.instagram.com/thecortexa" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">📸</a>
-      <a href="https://www.youtube.com/@yvrCortexa" target="_blank" rel="noopener" class="icon-btn" aria-label="YouTube">▶️</a>
-      <a href="https://www.facebook.com/profile.php?id=61592660908822" target="_blank" rel="noopener" class="icon-btn" aria-label="Facebook">👍</a>
+      <a href="https://www.instagram.com/yvrcortexa" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">📸</a>
     </div>
     <div class="copyright">&copy; <span id="year"></span> Cortexa</div>
   </div>
@@ -359,22 +340,6 @@
   }, { threshold: 0.15 });
   reveals.forEach(el => io.observe(el));
 
-  const heroVideo = document.getElementById('heroVideo');
-  const videoId = heroVideo.dataset.videoId;
-  const origin = window.location.origin.startsWith('http') ? window.location.origin : 'https://www.cortexa.com';
-  heroVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(origin)}`;
-
-  const soundBtn = document.getElementById('soundToggle');
-  let muted = true;
-  soundBtn.addEventListener('click', () => {
-    muted = !muted;
-    heroVideo.contentWindow.postMessage(JSON.stringify({
-      event: 'command',
-      func: muted ? 'mute' : 'unMute',
-      args: []
-    }), '*');
-    soundBtn.textContent = muted ? '🔇' : '🔊';
-  });
 </script>
 
 </body>
