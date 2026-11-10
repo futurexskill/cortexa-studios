@@ -215,6 +215,7 @@
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
+    align-items:center;
     gap:28px;
     width:100%;
     opacity:0;
@@ -259,7 +260,9 @@
   @media (max-width:799px){
     .video-frame.ig-frame{order:2;}
   }
-  /* Instagram's embed reflows badly when narrow: render at 400x700 and scale to fit */
+  /* Instagram's embed reflows badly when narrow: render at 400x700 and scale to fit.
+     Frame is cropped just below the media (header 52px + 400x500 video) to hide the likes/comments strip. */
+  .video-frame.ig-frame{aspect-ratio:400/552;}
   .video-frame.ig-frame iframe{
     inset:auto;top:0;left:0;
     width:400px;height:700px;max-width:none;
