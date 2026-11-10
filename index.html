@@ -251,28 +251,37 @@
     width:100%;height:100%;
     border:0;
   }
-  @media (min-width:800px){
+  /* text + button sit between the two videos */
+  .hero-mid{
+    display:flex;flex-direction:column;align-items:center;
+    text-align:center;
+  }
+  .hero-mid .hero-desc{margin-top:0;}
+  /* mobile / narrow: stack YouTube, text, Instagram */
+  @media (max-width:899px){
+    .video-frame-wrap{flex-direction:column;}
+    .video-frame{order:1;}
+    .hero-mid{order:2;}
+    .video-frame.ig-frame{order:3;}
+  }
+  /* desktop: Instagram | text | YouTube in one row, same height */
+  @media (min-width:900px){
+    .video-frame-wrap{flex-wrap:nowrap;}
     .video-frame{
-      --vf-w:min(400px, max(240px, calc((100svh - 400px) * 4 / 7)));
+      --vf-w:min(400px, max(240px, calc((100svh - 400px) * 4 / 7)), calc((100vw - 360px) / 2));
       width:var(--vf-w);
+      flex-shrink:0;
     }
-    /* same height as the 4:7 YouTube frame: widen Instagram frame instead of cropping */
-    .video-frame.ig-frame{
-      width:calc(var(--vf-w) * (7 / 4) * (400 / 552));
-    }
+    .hero-mid{flex:0 1 240px;}
   }
-  /* mobile: stack YouTube above Instagram */
-  @media (max-width:799px){
-    .video-frame.ig-frame{order:2;}
-  }
-  /* Instagram's embed reflows badly when narrow: render at 400x700 and scale to fit.
-     Frame is cropped just below the media (header 52px + 400x500 video) to hide the likes/comments strip. */
-  .video-frame.ig-frame{aspect-ratio:400/552;}
+  /* Instagram's embed reflows badly when narrow: render it at 400x700 and scale it so
+     only the video (rows ~54-553 of the embed) fills the same 4:7 frame as YouTube.
+     Header and likes strip fall outside the frame; video sides are cropped. */
   .video-frame.ig-frame iframe{
     inset:auto;top:0;left:0;
     width:400px;height:700px;max-width:none;
     transform-origin:0 0;
-    transform:scale(var(--ig-scale,1));
+    transform:translate(var(--ig-x,0px), var(--ig-y,0px)) scale(var(--ig-scale,1));
   }
   .video-notch{
     position:absolute;top:10px;left:50%;transform:translateX(-50%);
@@ -339,6 +348,12 @@
         loading="lazy">
       </iframe>
     </div>
+    <div class="hero-mid">
+      <p class="hero-desc">Original stories crafted with imagination, innovation, and cinematic excellence.</p>
+      <div class="hero-actions">
+        <a href="https://www.instagram.com/cortexafilms" target="_blank" rel="noopener" class="btn btn-primary">Explore Our Films</a>
+      </div>
+    </div>
     <div class="video-frame">
       <div class="video-notch"></div>
       <iframe
@@ -351,11 +366,6 @@
         loading="lazy">
       </iframe>
     </div>
-  </div>
-
-  <p class="hero-desc">Original stories crafted with imagination, innovation, and cinematic excellence.</p>
-  <div class="hero-actions">
-    <a href="https://www.instagram.com/cortexafilms" target="_blank" rel="noopener" class="btn btn-primary">Explore Our Films</a>
   </div>
 </section>
 
@@ -390,7 +400,13 @@
 (function(){
   var f=document.querySelector('.ig-frame');
   if(!f) return;
-  function fit(){ f.style.setProperty('--ig-scale', f.clientWidth/400); }
+  function fit(){
+    // video area inside the 400px-wide embed: rows 57..551 (inset a few px to avoid white edges)
+    var s=f.clientHeight/494;
+    f.style.setProperty('--ig-scale', s);
+    f.style.setProperty('--ig-x', ((f.clientWidth-400*s)/2)+'px');
+    f.style.setProperty('--ig-y', (-57*s)+'px');
+  }
   fit();
   if(window.ResizeObserver) new ResizeObserver(fit).observe(f);
   else window.addEventListener('resize', fit);
