@@ -253,7 +253,12 @@
   }
   @media (min-width:800px){
     .video-frame{
-      width:min(400px, max(240px, calc((100svh - 400px) * 4 / 7)));
+      --vf-w:min(400px, max(240px, calc((100svh - 400px) * 4 / 7)));
+      width:var(--vf-w);
+    }
+    /* same height as the 4:7 YouTube frame: widen Instagram frame instead of cropping */
+    .video-frame.ig-frame{
+      width:calc(var(--vf-w) * (7 / 4) * (400 / 552));
     }
   }
   /* mobile: stack YouTube above Instagram */
