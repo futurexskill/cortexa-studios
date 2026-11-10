@@ -39,7 +39,9 @@
   "url": "https://thecortexa.com/",
   "description": "Cortexa is a film production studio crafting original short films, AI-powered films, and web series across drama, thriller, sci-fi, and comedy.",
   "sameAs": [
-    "https://www.instagram.com/yvrcortexa"
+    "https://www.instagram.com/cortexafilms",
+    "https://www.facebook.com/p/Cortexa-Films-61596012118510/",
+    "https://www.youtube.com/@cortexafilm"
   ]
 }
 </script>
@@ -210,6 +212,11 @@
   /* hero video frame */
   .video-frame-wrap{
     margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:28px;
+    width:100%;
     opacity:0;
     animation:fadeUp 1s ease forwards 0.5s;
   }
@@ -242,6 +249,22 @@
     position:absolute;inset:0;
     width:100%;height:100%;
     border:0;
+  }
+  @media (min-width:800px){
+    .video-frame{
+      width:min(400px, max(240px, calc((100svh - 400px) * 4 / 7)));
+    }
+  }
+  /* mobile: stack YouTube above Instagram */
+  @media (max-width:799px){
+    .video-frame.ig-frame{order:2;}
+  }
+  /* Instagram's embed reflows badly when narrow: render at 400x700 and scale to fit */
+  .video-frame.ig-frame iframe{
+    inset:auto;top:0;left:0;
+    width:400px;height:700px;max-width:none;
+    transform-origin:0 0;
+    transform:scale(var(--ig-scale,1));
   }
   .video-notch{
     position:absolute;top:10px;left:50%;transform:translateX(-50%);
@@ -284,7 +307,7 @@
 <header id="siteHeader">
   <div class="wrap">
     <nav style="justify-content:flex-end;">
-      <a href="https://www.instagram.com/yvrcortexa" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">📸</a>
+      <a href="https://www.instagram.com/cortexafilms" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">📸</a>
     </nav>
   </div>
 </header>
@@ -296,14 +319,26 @@
   <p class="hero-tagline">Storytelling, Reimagined.</p>
 
   <div class="video-frame-wrap">
-    <div class="video-frame">
+    <div class="video-frame ig-frame">
       <div class="video-notch"></div>
       <iframe
         id="heroVideo"
-        src="https://www.instagram.com/reel/DbUJl_NvWZL/embed/"
+        src="https://www.instagram.com/p/DfcgYN5MjZH/embed/"
         title="Cortexa short film"
         frameborder="0"
         scrolling="no"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+    <div class="video-frame">
+      <div class="video-notch"></div>
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/n3UWdpLbM9Y"
+        title="Cortexa short film on YouTube"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen
         loading="lazy">
       </iframe>
@@ -312,7 +347,7 @@
 
   <p class="hero-desc">Original stories crafted with imagination, innovation, and cinematic excellence.</p>
   <div class="hero-actions">
-    <a href="https://www.instagram.com/yvrcortexa" target="_blank" rel="noopener" class="btn btn-primary">Explore Our Films</a>
+    <a href="https://www.instagram.com/cortexafilms" target="_blank" rel="noopener" class="btn btn-primary">Explore Our Films</a>
   </div>
 </section>
 
@@ -320,7 +355,9 @@
   <div class="wrap">
     <a href="#top" class="logo display chrome-text" style="font-size:22px;">CORTEXA</a>
     <div class="social-icons">
-      <a href="https://www.instagram.com/yvrcortexa" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram">📸</a>
+      <a href="https://www.facebook.com/p/Cortexa-Films-61596012118510/" target="_blank" rel="noopener" class="icon-btn" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.2h2.8V22h3.4z"/></svg></a>
+      <a href="https://www.instagram.com/cortexafilms/" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1zm0 4.9a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8zm0 8.1a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.1-9.4a1.15 1.15 0 1 0 0 2.3 1.15 1.15 0 0 0 0-2.3z"/></svg></a>
+      <a href="https://www.youtube.com/@cortexafilm" target="_blank" rel="noopener" class="icon-btn" aria-label="YouTube"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
     </div>
     <div class="copyright">&copy; <span id="year"></span> Cortexa</div>
   </div>
@@ -340,6 +377,16 @@
   }, { threshold: 0.15 });
   reveals.forEach(el => io.observe(el));
 
+
+// scale Instagram embed to its frame
+(function(){
+  var f=document.querySelector('.ig-frame');
+  if(!f) return;
+  function fit(){ f.style.setProperty('--ig-scale', f.clientWidth/400); }
+  fit();
+  if(window.ResizeObserver) new ResizeObserver(fit).observe(f);
+  else window.addEventListener('resize', fit);
+})();
 </script>
 
 </body>
